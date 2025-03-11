@@ -81,7 +81,7 @@ class OrderApp:
     def CreateMainPageLayout(self, root):
         #---Partitions of main page
         self.headerFrame = Frame(root)
-        self.headerFrame.pack(side="top", fill="x", expand=1)
+        self.headerFrame.pack(side="top", fill="x")
         self.headerFrame.configure(background=dark_yellow, height=self.screen_height//25)
         self.mainFrame = Frame(root)
         self.mainFrame.pack(side="bottom", fill="both", expand=1)
@@ -96,7 +96,7 @@ class OrderApp:
 
         self.btnCreateOrder = Button(self.headerFrame, text="MAKE ORDER")
         self.btnCreateOrder.grid(row=0, column=1, sticky="nswe")
-        self.btnCreateOrder.configure(background=light_blue, width=self.screen_width//165)
+        self.btnCreateOrder.configure(background=light_blue, width=self.screen_width//25)
 
         self.lblBranchName = Label(self.headerFrame, text="Bistro Olomouc")
         self.lblBranchName.grid(row=0, column=0, sticky="w", padx=(25,0))
@@ -563,79 +563,82 @@ class OrderApp:
         self.CreateShiftEndInfo()
         self.CreateForm()
 
-    def CreateTreeviewLayout(self):
-        orders = loadOrders()
 
-        for i, order in enumerate(orders):
-            
-            tagname = ""
-            if i%2 == 0:
-                tagname = "evenrow"
-            else:
-                tagname = "oddrow"
-            
-            
-            products = ""
-            datetimeOrder = order["datetime"].split()
-            customer_details = (
-                f"{order['customer']['name']}\n"
-                f"{order['customer']['address']}\n"
-                f"Tel.: {order['customer']['phone']}\n"
-                f"Cena za jídlo: {order['total_price']}"
-            )
 
-            order_details = (
-                f"Stav: {order['status']}\n"
-                f"Celkem cena: {order['total_price']}\n"
-                f"Doprava: {order['delivery']}"
-            )
 
-            for product in order["products"]:
-                products += f" • {product['name']} ({product['price']})\n"
-
-            self.tree.insert(
-                "", "end", 
-                values=(
-                    f"{datetimeOrder[0]}\n{datetimeOrder[1]}",
-                    order_details,
-                    products,
-                    customer_details
-                ), 
-                tags=tagname
-            )
-
-            
 
     def CreateHistoryOrdersPage(self):
-        style = ttk.Style()
-        style.configure("Treeview", rowheight=170)  # Increases row height
-        style.configure("Treeview.Heading", font=("Helvetica", 12, "bold"))
+        """Creates a scrollable frame for displaying order history."""
+        
+        # --- Create Canvas & Scrollbar ---
+        self.canvas = Canvas(self.frameHistoryOrders, bg="white")
+        self.scrollbar = Scrollbar(self.frameHistoryOrders, orient="vertical", command=self.canvas.yview)
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
 
-        # Create Treeview
-        columns = ("Datum přijetí", "Status a cena", "Objednávka", "Zákazník")
-        self.tree = ttk.Treeview(self.frameHistoryOrders, columns=columns, show="headings")
-        self.tree.tag_configure("evenrow", background="white")
-        self.tree.tag_configure("oddrow", background="lightgrey")
+        # --- Main frame inside Canvas ---
+        self.scrollable_frame = Frame(self.canvas, bg="white")
+
+        self.window_id = self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+
+        self.scrollable_frame.bind("<Configure>", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
+
+        # --- Pack Canvas and Scrollbar ---
+        self.canvas.pack(side="left", fill="both", expand=1)
+        self.scrollbar.pack(side="right", fill="y", ipadx=8)
+
+        self.CreateHeaderRow()  # Creates header row
+        for index, order in enumerate(loadOrders()):
+            self.CreateOrderRow(order, index)  # Creates each order row
 
 
-        # Define column headings
-        self.tree.heading("Datum přijetí", text="Datum přijetí", anchor="w")
-        self.tree.heading("Status a cena", text="Status a cena", anchor="w")
-        self.tree.heading("Objednávka", text="Objednávka", anchor="w")
-        self.tree.heading("Zákazník", text="Zákazník", anchor="w")
+    def CreateHeaderRow(self):
+        
+        headers = ["Přijato", "State and Price", "Order Info", "Customer"]
+        widthColumn = int(self.screen_width/105)
+        self.column_widths = [int(widthColumn*1.5), int(widthColumn*1.5), int(widthColumn*4.5), int(widthColumn*2.5)]
 
-        # Adjust column widths for better spacing
-        self.tree.column("Datum přijetí", width=100, anchor="w")
-        self.tree.column("Status a cena", width=120, anchor="w")
-        self.tree.column("Objednávka", width=500, anchor="w")
-        self.tree.column("Zákazník", width=300, anchor="w")
 
-        self.CreateTreeviewLayout()
+        header_frame = Frame(self.scrollable_frame, bg="gray", padx=5, pady=5)
+        header_frame.grid(row=0, column=0, columnspan=4, sticky="ew")
 
-        self.treeScrollbar = ttk.Scrollbar(self.frameHistoryOrders, orient=VERTICAL, command=self.tree.yview)
-        self.tree.configure(yscroll=self.treeScrollbar.set)
-        self.treeScrollbar.pack(side="right", fill="y")
-        self.tree.pack(expand=True, fill="both")
+        for col, text in enumerate(headers):
+            label = Label(header_frame, text=text, font=("Helvetica", 14, "bold"), 
+                        bg="gray", fg="white", width=self.column_widths[col], anchor="w")
+            label.grid(row=0, column=col, padx=5, pady=2, sticky="w")
+
+
+    def CreateOrderRow(self, order, index):
+        """Creates a structured row for an order (Treeview-style)."""
+
+        bg_color = light_text_color
+
+        row_frame = Frame(self.scrollable_frame, bg=bg_color, padx=5, pady=5)
+        row_frame.grid(row=(index+1)*2, column=0, columnspan=4, sticky="ew")
+
+        # Column 1: Date & Time
+        date_time_order = f"{order["datetime"].split()[0]} - {order["datetime"].split()[1]}"
+        datetime_label = Label(row_frame, text=date_time_order, font=("Helvetica", 16), bg=bg_color, anchor="w", width=23)
+        datetime_label.grid(row=0, column=0, padx=(5,0), pady=2, sticky="ew", ipady=60)
+
+        # Column 2: Status & Price
+        status_price_text = f"Stav: {order['status']}\nCelkem cena: {order['total_price']}\nDoprava: {order['delivery']}"
+        status_price_label = Label(row_frame, text=status_price_text, font=("Helvetica", 16), bg=bg_color, width=23, justify=LEFT,
+                                   anchor="w")
+        status_price_label.grid(row=0, column=1, pady=2, padx=(4,0), sticky="ew")
+
+        # Column 3: Ordered Items
+        items_text = "\n".join(f" • {p['name']} ({p['price']})" for p in order["products"])
+        items_label = Label(row_frame, text=items_text, font=("Helvetica", 16), bg=bg_color, justify=LEFT, anchor="w", width=68)
+        items_label.grid(row=0, column=2, pady=16, padx=(8,0), sticky="ew")
+
+        # Column 4: Customer Info
+        customer_info = f"{order['customer']['name']}\n{order['customer']['address']}\nTel.: {order['customer']['phone']}\nCena: {order['total_price']}"
+        customer_label = Label(row_frame, text=customer_info, font=("Helvetica", 16), bg=bg_color, justify=LEFT, anchor="w")
+        customer_label.grid(row=0, column=3, pady=2, sticky="ew")
+
+        # Separator
+        separator = Frame(self.scrollable_frame, height=2, bg=dark_text_color)
+        separator.grid(row=(index+1)*2+1, column=0, columnspan=4, sticky="ew", pady=2)
 
 
 

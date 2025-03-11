@@ -44,7 +44,12 @@
       },
       "products": [
         {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
+        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
+        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
+        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
+        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
         {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
+        
       ]
     },
     {

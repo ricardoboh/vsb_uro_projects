@@ -5,7 +5,7 @@
 from tkinter import *
 import json
 from math import sqrt
-from PIL import Image, ImageTk
+#from PIL import Image, ImageTk
 from tkinter import messagebox as msg
 import tkinter.font
 from tkinter import ttk
@@ -17,7 +17,21 @@ def loadOrders():
     except FileNotFoundError:
         print("Error: orders.json file not found.")
         return []
+    
+light_red    = "#f79797"
+light_green  = "#9af797"
+light_yellow = "#f4f797"
+light_blue   = "#97c2f7"
+light_purple = "#c597f7"
 
+dark_red     = "#f73a34"
+dark_green   = "#0d8701"
+dark_yellow  = "#d1a711"
+dark_blue    = "#2958cf"
+dark_purple  = "#a922d6"
+
+dark_text_color  = "#06010a"
+light_text_color = "#eee9f2"
 
 class OrderApp:
 
@@ -39,16 +53,14 @@ class OrderApp:
         root.geometry(f"{self.screen_width-70}x{self.screen_height}+70+0")
 
         #Variables
-        self.varTakeAwaySum = IntVar(value = 0)
+        self.varTakeAwaySum = IntVar(value = 1000)
         self.varDeferment = IntVar(value = 0)
-        self.varDictDeliveries = {"R1": IntVar(value = 0), "R2": IntVar(value = 0),
-                                  "R3": IntVar(value = 0), "R4": IntVar(value = 0),
-                                  "R5": IntVar(value = 0), "R6": IntVar(value = 0)
+        self.varDictDeliveries = {1: IntVar(value = 0), 2: IntVar(value = 0),
+                                  3: IntVar(value = 0), 4: IntVar(value = 0),
+                                  5: IntVar(value = 0), 6: IntVar(value = 0)
                                   }
         self.varCash = IntVar(value = 0)
 
-        #Key bindings
-        root.bind("<Escape>", lambda event: root.destroy()) 
 
         #Fonts
         self.def_font = tkinter.font.nametofont("TkDefaultFont")
@@ -59,11 +71,18 @@ class OrderApp:
         self.CreateNotebook()
         self.CreateShiftEndPage()
         self.CreateHistoryOrdersPage()
+
+
+        #Key bindings
+        root.bind("<Escape>", lambda event: root.destroy())
+        self.frameShiftEnd.bind("<FocusIn>", lambda event: root.bind("<Return>", lambda event: self.CountEndShift()))
+        self.frameShiftEnd.bind("<FocusOut>", lambda event: root.unbind("<Return>"))
+
     def CreateMainPageLayout(self, root):
         #---Partitions of main page
         self.headerFrame = Frame(root)
         self.headerFrame.pack(side="top", fill="x", expand=1)
-        self.headerFrame.configure(background="red", height=self.screen_height//25)
+        self.headerFrame.configure(background=dark_yellow, height=self.screen_height//25)
         self.mainFrame = Frame(root)
         self.mainFrame.pack(side="bottom", fill="both", expand=1)
         self.CreateHeaderLayout()
@@ -77,15 +96,15 @@ class OrderApp:
 
         self.btnCreateOrder = Button(self.headerFrame, text="MAKE ORDER")
         self.btnCreateOrder.grid(row=0, column=1, sticky="nswe")
-        self.btnCreateOrder.configure(background="blue", width=self.screen_width//165)
+        self.btnCreateOrder.configure(background=light_blue, width=self.screen_width//165)
 
         self.lblBranchName = Label(self.headerFrame, text="Bistro Olomouc")
         self.lblBranchName.grid(row=0, column=0, sticky="w", padx=(25,0))
-        self.lblBranchName.configure(foreground="white")
+        self.lblBranchName.configure(foreground="white", background=dark_yellow)
 
         self.btnLogout = Button(self.headerFrame, text="Odhlasit se")
         self.btnLogout.grid(row=0, column=3, sticky="e", padx=(0, 10))
-        self.btnLogout.configure(foreground="white")
+        self.btnLogout.configure(foreground="white", background=dark_yellow)
 
 
     def CreateNotebook(self):
@@ -167,7 +186,7 @@ class OrderApp:
         self.frameDeliveries.grid(column=0, row=1, sticky="nw", padx=0, pady=5)
         self.lblAllDeliveriesInfo = Label(self.frameDeliveries, text="Division by deliveries:")
         self.lblAllDeliveriesInfo.configure(font="Helvetica 16 bold")
-        self.lblAllDeliveriesInfo.grid(column=0, row=0, sticky="nw", padx=0, pady=2)
+        self.lblAllDeliveriesInfo.grid(column=0, row=0, columnspan=2, sticky="nw", padx=0, pady=(15, 2))
 
         """
         This is the list of labels of Delivery guys and the Take away and what is
@@ -193,7 +212,16 @@ class OrderApp:
         counted.
         """
         
-        self.listOfDeliveryLabels = []
+        for key, value in self.varDictDeliveries.items():
+            if value.get() != 0:
+                Label(self.frameDeliveries, text=f"R{key} - {value.get()}Kč").grid(column=0, row=key, sticky="w")
+                #Label(self.frameDeliveries, text=f"R{key}").grid(column=0, row=key, sticky="w")
+                #Label(self.frameDeliveries, text=f"{value.get()}Kč").grid(column=1, row=key, sticky="w")
+        if self.varTakeAwaySum.get() != 0:
+            Label(self.frameDeliveries ,text=f"Take away - {self.varTakeAwaySum.get()}Kč").grid(column=0, row=8, sticky="w")
+            #Label(self.frameDeliveries ,text=f"Take away").grid(column=0, row=8, sticky="w")
+            #Label(self.frameDeliveries ,text=f"{self.varTakeAwaySum.get()}Kč").grid(column=1, row=8, sticky="w")
+                
 
         self.frameSumaryOfDeliveries = Frame(self.frameEndInfoShiftEnd)
         self.frameSumaryOfDeliveries.grid(column=0, row=2, sticky="nw", padx=0, pady=25)
@@ -267,7 +295,7 @@ class OrderApp:
         self.lblExtraMoney = Label(self.frameEndFormShiftEnd, text="Money Deferment (1000Kč):", font=("Helvetica", 18))
         self.lblExtraMoney.grid(column=0, row=4, sticky="w", padx=10, pady=10)
 
-        self.entrySumExtraMoney = Entry(self.frameEndFormShiftEnd, width=20, textvariable=self.varDeferment, font=("Helvetica", 18))
+        self.entrySumExtraMoney = Entry(self.frameEndFormShiftEnd, width=20, textvariable=self.varDeferment, font=("Helvetica", 18), state="disabled")
         self.entrySumExtraMoney.grid(column=1, row=4, padx=25, pady=10, ipady=5, sticky="ew")
 
         # --- Cash Handed Over ---
@@ -381,6 +409,16 @@ class OrderApp:
         self.entrySumFoodCards.config(state="normal")
         self.entrySumShopping.config(state="normal")
         self.entrySumTakeAway.config(state="normal")
+        self.entrySumOfTakeAway.config(state="normal")
+
+    def SaveEndShift(self):
+        self.btnCountEndShift.config(text="EDIT", command=self.EditEndShiftForm)
+        self.entrySumCards.config(state="disabled")
+        self.entrySumExtraMoney.config(state="disabled")
+        self.entrySumFoodCards.config(state="disabled")
+        self.entrySumOfTakeAway.config(state="disabled")
+        self.entrySumShopping.config(state="disabled")
+        self.entrySumTakeAway.config(state="disabled")
     
     def MakeFinalSum(self):
 
@@ -397,20 +435,36 @@ class OrderApp:
         for key, entry in form_entry_fields.items():
             try:
                 values[key] = int(entry.get())
-                entry.config(background="white", foreground="black")
+                entry.config(background="white", foreground=dark_text_color)
             except ValueError:
-                entry.config(background="red", foreground="white")
+                entry.config(background=dark_red, foreground=light_text_color)
                 return
 
         expenses = values["cards"] + values["food_cards"] + values["shopping"]
 
         if values["take_away_sum"] < expenses:
+            error_field = False
             for key in ["cards", "food_cards", "shopping"]:
                 if values[key] > values["take_away_sum"]:
-                    form_entry_fields[key].config(background="red", foreground="white")
-                    # !!!!!!!!!!!!!!!!!!!! Do Some conversation block
-                    # !!!!!!!!!!!!!!!!!!!!
-                    # Work to do
+                    form_entry_fields[key].config(background=dark_red, foreground=light_text_color)
+                    error_field = True
+
+            if error_field:
+                self.ShowErrorMessage(f"Field with red background\n"
+                    f"has unexpectedly high value\n"
+                    f"Please take a look at this field\n"
+                    )
+            else:
+                self.ShowErrorMessage(f"\n\n\nThe expenses are higher\n"
+                    f"than expected.\n"
+                    f"Please take a look at this field\n\n"
+                    f"In case that there were\n"
+                    f"big shopping expenses,\n"
+                    f"plese give the receipt to\n"
+                    f"any delivery guy and erase\n"
+                    f"the value here."
+                    )
+
         else:
             sum_with_deferment = values["take_away_sum"] - expenses
             if sum_with_deferment < 1000:
@@ -419,8 +473,31 @@ class OrderApp:
             else:
                 self.varDeferment.set(1000)
                 self.varCash.set(sum_with_deferment - 1000)
+            
+            self.ErrorMessageSuccess()
+
+    def ShowErrorMessage(self, message):
+        self.errorCanvas.itemconfig(self.canvasText, text=message, fill=dark_text_color)
+        self.errorCanvas.config(bg=light_red)
+
+    def ErrorMessageSuccess(self):
+        success_message = (
+            f"\n\n\n\nEverything looks good\n\n"
+            f"Please pack:\n"
+        )
+
+        if self.varCash.get() != 0:
+            success_message+=f"\t{self.varCash.get()}Kč in cash\n"
+        if self.entrySumCards.get() != "0":
+            success_message+=f"\t{self.entrySumCards.get()}Kč in card reciepts\n"
+        if self.entrySumFoodCards.get() != "0":
+            success_message+=f"\t{self.entrySumFoodCards.get()}Kč in food cards\n"
 
 
+
+        self.errorCanvas.itemconfig(self.canvasText,
+            text=success_message, fill=dark_text_color)
+        self.errorCanvas.config(bg=light_green)
 
     def CountEndShift(self):
 
@@ -430,29 +507,31 @@ class OrderApp:
             "fSum": self.entrySumFoodCards,
             "sSum": self.entrySumShopping
         }
-        try:
-            for key, entry in entry_fields.items():
-                try:
-                    int(entry.get())
-                    entry.config(background="white", foreground="black")
-                except ValueError:
-                    entry.config(background="red", foreground="white")
-        except:
-            pass
+
+        error_found = False
+
+        self.errorCanvas = Canvas(self.frameEndFormShiftEnd, width=300, height=100, bg="lightgrey")
+        self.errorCanvas.grid(column=3, row=0, rowspan=7, padx=10, pady=(20, 0), sticky="nsw")
+
+        self.canvasText = self.errorCanvas.create_text(140, 80, text="", font=("Helvetica", 14, "bold"), fill=dark_red, width=300)
+    
+        for key, entry in entry_fields.items():
+            try:
+                int(entry.get())
+                entry.config(background=light_text_color, foreground=dark_text_color)
+            except ValueError:
+                entry.config(background=dark_red, foreground=light_text_color)
+                error_found = True
+
+        if error_found:
+            self.ShowErrorMessage(f"In a field with red background\n"
+            f"is an unexpected character.\n"
+            f"Please insert only numbers\n"
+            )
         else:
             self.MakeFinalSum()
 
         
-
-
-    def SaveEndShift(self):
-        self.btnCountEndShift.config(text="EDIT", command=self.EditEndShiftForm)
-        self.entrySumCards.config(state="disabled")
-        self.entrySumExtraMoney.config(state="disabled")
-        self.entrySumFoodCards.config(state="disabled")
-        self.entrySumOfTakeAway.config(state="disabled")
-        self.entrySumShopping.config(state="disabled")
-        self.entrySumTakeAway.config(state="disabled")
 
 
     def CreateShiftEndPage(self):
@@ -469,14 +548,14 @@ class OrderApp:
         
         #Components in Buttons Shift End
         self.btnPrintEnd = Button(self.frameInteractiveShiftEnd, text="PRINT DAILY OVERVIEW", 
-                                  bg="lightblue", fg="white", border=2, borderwidth=2,
+                                  bg=light_blue, fg=light_text_color, border=2, borderwidth=2,
                                   padx=15)
         self.btnPrintEnd.grid(column=0, row=0, rowspan=2,
                               padx=(15, 0), pady=(15,10),
                               sticky="n")
         
         self.btnSaveInovice = Button(self.frameInteractiveShiftEnd, text="UPLOAD INOVICE", 
-                                  bg="lightblue", fg="white", border=2, borderwidth=2,
+                                  bg=light_blue, fg=light_text_color, border=2, borderwidth=2,
                                     padx=15)
         self.btnSaveInovice.grid(column=1, row=0, rowspan=2,
                                  padx=(170,0), pady=(15,0),

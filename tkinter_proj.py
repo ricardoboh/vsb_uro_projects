@@ -581,6 +581,9 @@ class OrderApp:
         self.window_id = self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
 
         self.scrollable_frame.bind("<Configure>", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
+        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)  # Windows/MacOS
+        self.canvas.bind_all("<Button-4>", self._on_mousewheel)    # Linux (Scroll Up)
+        self.canvas.bind_all("<Button-5>", self._on_mousewheel)
 
         # --- Pack Canvas and Scrollbar ---
         self.canvas.pack(side="left", fill="both", expand=1)
@@ -589,6 +592,19 @@ class OrderApp:
         self.CreateHeaderRow()  # Creates header row
         for index, order in enumerate(loadOrders()):
             self.CreateOrderRow(order, index)  # Creates each order row
+
+    def _on_mousewheel(self, event):
+        
+        self.scroll_speed = 0.015
+
+        current_position = self.canvas.yview()[0]
+        
+        if event.num == 4:
+            new_position = max(0, current_position - self.scroll_speed)
+        if event.num == 5:
+            new_position = min(1, current_position + self.scroll_speed)
+        
+        self.canvas.yview_moveto(new_position)
 
 
     def CreateHeaderRow(self):

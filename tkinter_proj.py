@@ -71,6 +71,7 @@ class OrderApp:
         self.CreateNotebook()
         self.CreateShiftEndPage()
         self.CreateHistoryOrdersPage()
+        self.CreateActiveOrdersPage()
 
 
         #Key bindings
@@ -655,6 +656,120 @@ class OrderApp:
         # Separator
         separator = Frame(self.scrollable_frame, height=2, bg=dark_text_color)
         separator.grid(row=(index+1)*2+1, column=0, columnspan=4, sticky="ew", pady=2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def CreateActiveOrdersPage(self):
+        """Creates a scrollable frame for displaying order history."""
+        
+        # --- Create Canvas & Scrollbar ---
+        self.activeCanvas = Canvas(self.frameActiveOrders, bg="white")
+        self.activeScrollbar = Scrollbar(self.frameActiveOrders, orient="vertical", command=self.activeCanvas.yview)
+        self.activeCanvas.configure(yscrollcommand=self.activeScrollbar.set)
+
+        # --- Main frame inside activeCanvas ---
+        self.active_scrollable_frame = Frame(self.activeCanvas, bg="white")
+
+        self.window_id = self.activeCanvas.create_window((0, 0), window=self.active_scrollable_frame, anchor="nw")
+
+        self.active_scrollable_frame.bind("<Configure>", lambda e: self.activeCanvas.configure(scrollregion=self.activeCanvas.bbox("all")))
+        self.activeCanvas.bind_all("<MouseWheel>", self._on_mousewheel)
+        self.activeCanvas.bind_all("<Button-4>", self._on_mousewheel)
+        self.activeCanvas.bind_all("<Button-5>", self._on_mousewheel)
+
+        # --- Pack activeCanvas and activeScrollbar ---
+        self.activeCanvas.pack(side="left", fill="both", expand=1)
+        self.activeScrollbar.pack(side="right", fill="y", ipadx=8)
+
+        self.CreateActiveHeaderRow()  # Creates header row
+        for index, order in enumerate(loadOrders()):
+            if order['delivery'] == "Neznámý":
+                self.CreateActiveOrderRow(order, index)  # Creates each order row
+
+
+    def CreateActiveHeaderRow(self):
+        
+        headers = ["Přijato", "Order Info", "State and Price", "Customer", "Actions"]
+        widthColumn = int(self.screen_width/105)
+        self.column_widths = [int(widthColumn*1), int(widthColumn*4), int(widthColumn*1.5), int(widthColumn*2), int(widthColumn*1.5)]
+
+
+        header_frame = Frame(self.active_scrollable_frame, bg="gray", padx=5, pady=5)
+        header_frame.grid(row=0, column=0, columnspan=5, sticky="ew")
+
+        for col, text in enumerate(headers):
+            label = Label(header_frame, text=text, font=("Helvetica", 14, "bold"), 
+                        bg="gray", fg="white", width=self.column_widths[col], anchor="w")
+            label.grid(row=0, column=col, padx=5, pady=2, sticky="w")
+
+
+    def CreateActiveOrderRow(self, order, index):
+        """Creates a structured row for an order (Treeview-style)."""
+
+        bg_color = light_text_color
+
+        row_frame = Frame(self.active_scrollable_frame, bg=bg_color, padx=5, pady=5)
+        row_frame.grid(row=(index+1)*2, column=0, columnspan=5, sticky="ew")
+
+        # Column 1: Date & Time
+        date_time_order = f"{order["datetime"].split()[0]}\n   {order["datetime"].split()[1]}"
+        datetime_label = Label(row_frame, text=date_time_order, font=("Helvetica", 16), bg=dark_red, anchor="w", width=16)
+        datetime_label.grid(row=0, column=0, padx=(5,0), pady=2, sticky="ew", ipady=60)
+
+        # Column 2: Status & Price
+        status_price_text = f"Stav: {order['status']}\nCelkem cena: {order['total_price']}\nDoprava: {order['delivery']}"
+        status_price_label = Label(row_frame, text=status_price_text, font=("Helvetica", 16), bg=bg_color, width=23, justify=LEFT,
+                                   anchor="w")
+        status_price_label.grid(row=0, column=2, pady=2, padx=(0,0), sticky="ew")
+
+        # Column 3: Ordered Items
+        items_text = "\n".join(f" • {p['name']} ({p['price']})" for p in order["products"])
+        items_label = Label(row_frame, text=items_text, font=("Helvetica", 16), bg=bg_color, justify=LEFT, anchor="w", width=40)
+        items_label.grid(row=0, column=1, pady=16, padx=(8,0), sticky="ew")
+
+        # Column 4: Customer Info
+        customer_info = f"{order['customer']['name']}\n{order['customer']['address']}\nTel.: {order['customer']['phone']}\nCena: {order['total_price']}"
+        customer_label = Label(row_frame, text=customer_info, font=("Helvetica", 16), bg=bg_color, justify=LEFT, anchor="w")
+        customer_label.grid(row=0, column=3, pady=2, sticky="ew")
+
+        # Column 5: Actions
+        self.lblButtons = Label(row_frame, text=customer_info, font=("Helvetica", 16), bg=bg_color, anchor="center")
+        self.lblButtons.grid(row=0, column=4, pady=2, sticky="ew")
+        self.btnVerify = Button(self.lblButtons, width=15)
+        self.btnVerify.grid(column=0, row=0)
+        self.btnCancel = Button(self.lblButtons, width=15)
+        self.btnCancel.grid(column=0, row=1)
+        self.btnPrint = Button(self.lblButtons, width=15)
+        self.btnPrint.grid(column=0, row=2)
+
+
+
+        # Separator
+        separator = Frame(self.active_scrollable_frame, height=2, bg=dark_text_color)
+        separator.grid(row=(index+1)*2+1, column=0, columnspan=4, sticky="ew", pady=2)
+
+
+
+
+
+
+
+
+
 
 
 

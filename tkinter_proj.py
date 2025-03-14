@@ -15,11 +15,11 @@ def loadOrders():
         with open("orders.json", "r", encoding="utf-8") as file:
             orders = json.load(file)
 
-            # Ensure it returns a list of dictionaries
             if not isinstance(orders, list):
-                raise ValueError("Error: JSON data is not a list.")
+                raise ValueError("JSON data not in a list.")
 
             return orders
+
     except (FileNotFoundError, json.JSONDecodeError) as e:
         print(f"Error loading JSON: {e}")
         return []
@@ -129,8 +129,7 @@ class OrderApp:
 
     def __init__(self, root):
 
-        #Window title
-        root.title('Pizza app')
+        root.title("Aplikace pizzerie")
 
         #Window sizes
         root.resizable(False, False)
@@ -139,15 +138,22 @@ class OrderApp:
         root.geometry(f"{self.screen_width-70}x{self.screen_height-70}+70+0")
 
         #Variables
+        #Take Away Sum
         self.varTakeAwaySum = IntVar(value = 0)
+        #Deferment from TakeAway
         self.varDeferment = IntVar(value = 0)
+        #Delivery guys financials
         self.varDictDeliveries = {1: IntVar(value = 0), 2: IntVar(value = 0),
                                   3: IntVar(value = 0), 4: IntVar(value = 0),
                                   5: IntVar(value = 0), 6: IntVar(value = 0)
                                   }
+        #Cash handled by Take Away
         self.varCash = IntVar(value = 0)
+        #Sum of Orders without canceled Orders
         self.varFinalSum = IntVar(value = 0)
+        #Sum of Orders with canceled Orders
         self.varDailyPrice = IntVar(value = 0)
+        #Num of Orders
         self.varOrderNum = IntVar(value = 0)
 
 
@@ -184,19 +190,23 @@ class OrderApp:
         self.headerFrame.grid_columnconfigure(1, weight=1)
         self.headerFrame.grid_columnconfigure(2, weight=1)
 
-        self.btnCreateOrder = Button(self.headerFrame, text="MAKE ORDER",
+        #For now it generates random order after click
+        self.btnCreateOrder = Button(self.headerFrame, text="VYTVOŘIT OBJEDNÁVKU",
                                      command=lambda:self.generateRandomOrder())
         self.btnCreateOrder.grid(row=0, column=1, sticky="nswe")
         self.btnCreateOrder.configure(background=light_blue, width=self.screen_width//25)
 
-        self.lblBranchName = Label(self.headerFrame, text="Bistro Olomouc")
+        #Info label in header
+        self.lblBranchName = Label(self.headerFrame, text="Bistro Olomouc - BOH0162")
         self.lblBranchName.grid(row=0, column=0, sticky="w", padx=(25,0))
         self.lblBranchName.configure(foreground="white", background=dark_yellow)
 
-        self.btnLogout = Button(self.headerFrame, text="Odhlasit se")
-        self.btnLogout.grid(row=0, column=3, sticky="e", padx=(0, 10))
+        #Logout button
+        self.btnLogout = Button(self.headerFrame, text="Odhlasit se", border=0)
+        self.btnLogout.grid(row=0, column=3, sticky="e", padx=(0, 0))
         self.btnLogout.configure(foreground="white", background=dark_yellow)
 
+    #Generates random order with random values
     def generateRandomOrder(self):
         name = random.choice(names) + random.choice(surnames)
         village = random.choice(villages)
@@ -262,54 +272,35 @@ class OrderApp:
         self.frameShiftEnd = ttk.Frame(self.notebook)
         self.frameShiftEnd.pack()
 
-        self.notebook.add(self.frameActiveOrders, text="Active Orders")
-        self.notebook.add(self.frameHistoryOrders, text="Orders history")
-        self.notebook.add(self.frameShiftEnd, text="End of shift")
+        self.notebook.add(self.frameActiveOrders, text="Aktivní objednávky")
+        self.notebook.add(self.frameHistoryOrders, text="Historie objednávek")
+        self.notebook.add(self.frameShiftEnd, text="Konec směny")
     
+    #Info page when shift ends
     def CreateShiftEndInfo(self):
-        #Components in End Info Shift End
-
         
         self.frameGenerated = Frame(self.frameEndInfoShiftEnd)
         self.frameGenerated.grid(column=0, row=0, sticky="nw", padx=0)
 
-        self.lblEnd = Label(self.frameGenerated, text="END OF SHIFT", font="Helvetica 18 bold")
+        # Main info label
+        self.lblEnd = Label(self.frameGenerated, text="UZÁVĚRKA FINANCÍ SMĚNY", font="Helvetica 18 bold")
         self.lblEnd.grid(column=0, row=0, columnspan=2, pady=(25,5), sticky="nw")
         
 
-        """
-        self.lblGenerated = Label(self.frameGenerated, text="Generated: ---Date and Time when Notebook page button was clicked---")
-        self.lblGenerated.grid(column=0, row=1, sticky=W, padx=10, pady=2)
-        self.lblGenerated.configure(font="Helvetica 16")
-        self.lblDateFrom = Label(self.frameGenerated, text="Date from: ---Date and Time when the first Order was accepted---")
-        self.lblDateFrom.grid(column=0, row=2, sticky=W, padx=10, pady=2)
-        self.lblDateFrom.configure(font="Helvetica 16")
-        self.lblDateTo = Label(self.frameGenerated, text="Date to: ---Date and Time when the last Order was accepted---")
-        self.lblDateTo.grid(column=0, row=3, sticky=W, padx=10, pady=2)
-        self.lblDateTo.configure(font="Helvetica 16")
-        self.lblNumOfOrders = Label(self.frameGenerated, text="Number of Orders: ---The sum of accepted orders---")
-        self.lblNumOfOrders.grid(column=0, row=4, sticky=W, padx=10, pady=2)
-        self.lblNumOfOrders.configure(font="Helvetica 16")
-        """
-
-        # Upgraded the printing of Labels, the value of label has
-        # the same alligment as the value before and the title labels 
-        # has also the same alligment
-        #"""
-
-        self.lblGenerated = Label(self.frameGenerated, text="Generated:", font="Helvetica 16")
+        # Left Info labels
+        self.lblGenerated = Label(self.frameGenerated, text="Uzávěrka generována:", font="Helvetica 16")
         self.lblGenerated.grid(column=0, row=1, sticky="nw", padx=0, pady=2)
 
-        self.lblDateFrom = Label(self.frameGenerated, text="Date from:", font="Helvetica 16")
+        self.lblDateFrom = Label(self.frameGenerated, text="První objednávka přijata:", font="Helvetica 16")
         self.lblDateFrom.grid(column=0, row=2, sticky="nw", padx=0, pady=2)
 
-        self.lblDateTo = Label(self.frameGenerated, text="Date to:", font="Helvetica 16")
+        self.lblDateTo = Label(self.frameGenerated, text="Poslední objednávka přijata:", font="Helvetica 16")
         self.lblDateTo.grid(column=0, row=3, sticky="nw", padx=0, pady=2)
 
-        self.lblNumOfOrders = Label(self.frameGenerated, text="Number of Orders:", font="Helvetica 16")
+        self.lblNumOfOrders = Label(self.frameGenerated, text="Počet objednávek:", font="Helvetica 16")
         self.lblNumOfOrders.grid(column=0, row=4, sticky="nw", padx=0, pady=2)
 
-        # Dynamic Values (Right Column)
+        # Right Values label
         self.valueGenerated = Label(self.frameGenerated, text="---", font="Helvetica 16", fg="blue")
         self.valueGenerated.grid(column=1, row=1, sticky="nw", padx=15, pady=2)
 
@@ -321,13 +312,13 @@ class OrderApp:
 
         self.valueNumOfOrders = Label(self.frameGenerated, text="---", font="Helvetica 16", fg="blue")
         self.valueNumOfOrders.grid(column=1, row=4, sticky="nw", padx=15, pady=2)
-        #"""
-
 
         
+        # Frame for Deliveries Info Labels
         self.frameDeliveries = Frame(self.frameEndInfoShiftEnd)
         self.frameDeliveries.grid(column=0, row=1, sticky="nw", padx=0, pady=5)
-        self.lblAllDeliveriesInfo = Label(self.frameDeliveries, text="Division by deliveries:")
+
+        self.lblAllDeliveriesInfo = Label(self.frameDeliveries, text="Rozdělení podle rozvozců:")
         self.lblAllDeliveriesInfo.configure(font="Helvetica 16 bold")
         self.lblAllDeliveriesInfo.grid(column=0, row=0, columnspan=2, sticky="nw", padx=0, pady=(15, 2))
 
@@ -357,48 +348,36 @@ class OrderApp:
         
         for key, value in self.varDictDeliveries.items():
             if value.get() != 0:
+                # Anonymous Label with delivery info
                 Label(self.frameDeliveries, text=f"R{key} - {value.get()}Kč").grid(column=0, row=key, sticky="w")
-                #Label(self.frameDeliveries, text=f"R{key}").grid(column=0, row=key, sticky="w")
-                #Label(self.frameDeliveries, text=f"{value.get()}Kč").grid(column=1, row=key, sticky="w")
         if self.varTakeAwaySum.get() != 0:
-            Label(self.frameDeliveries ,text=f"Take away - {self.varTakeAwaySum.get()}Kč").grid(column=0, row=8, sticky="w")
-            #Label(self.frameDeliveries ,text=f"Take away").grid(column=0, row=8, sticky="w")
-            #Label(self.frameDeliveries ,text=f"{self.varTakeAwaySum.get()}Kč").grid(column=1, row=8, sticky="w")
-                
+            # Anonymous Label with delivery info
+            Label(self.frameDeliveries ,text=f"Bistro - {self.varTakeAwaySum.get()}Kč").grid(column=0, row=8, sticky="w")
+   
 
+        # Frame for Deliveries Values Labels
         self.frameSumaryOfDeliveries = Frame(self.frameEndInfoShiftEnd)
         self.frameSumaryOfDeliveries.grid(column=0, row=2, sticky="nw", padx=0, pady=25)
+        
         """
         This Label(lblSumDone) has value which is counted only for the finished Orders
         the canceled Orders and the unknown Orders values ARE NOT COUNTED IN HERE! 
         """
-
-        """
-        self.lblSumDone = Label(self.frameSumaryOfDeliveries, text="FINISHED SUM: ---Sum of orders which was marked as finished---")
-        self.lblSumDone.grid(column=0, row=0, sticky="nw", padx=10, pady=(0, 10))
-        self.lblSumDone.configure(font="Helvetica 18 bold")
-        
-        self.lblSumAll = Label(self.frameSumaryOfDeliveries, text="Total Sum: ---Sum of all Orders which was accepted that day---")
-        self.lblSumAll.grid(column=0, row=1, sticky="nw", padx=10, pady=(0, 10))
-        self.lblSumAll.configure(font="Helvetica 15 bold")
-        """
-
-        #"""
-        # Labels (Left Column)
-        self.lblSumDone = Label(self.frameSumaryOfDeliveries, text="FINISHED SUM:", font="Helvetica 18 bold")
+        # Left Column with Info
+        self.lblSumDone = Label(self.frameSumaryOfDeliveries, text="CELKEM HOTOVO:", font="Helvetica 18 bold")
         self.lblSumDone.grid(column=0, row=0, sticky="nw", padx=0, pady=(0, 10))
 
-        self.lblSumAll = Label(self.frameSumaryOfDeliveries, text="Total Sum:", font="Helvetica 15 bold")
+        self.lblSumAll = Label(self.frameSumaryOfDeliveries, text="Přijato celkem:", font="Helvetica 15 bold")
         self.lblSumAll.grid(column=0, row=1, sticky="nw", padx=0, pady=(0, 10))
 
-        # Dynamic Values (Right Column)
+        # Right Column with Values
         self.valueSumDone = Label(self.frameSumaryOfDeliveries, text="", font="Helvetica 18 bold", fg="blue")
         self.valueSumDone.grid(column=1, row=0, sticky="nw", padx=20, pady=(0, 10))
 
         self.valueSumAll = Label(self.frameSumaryOfDeliveries, text="", font="Helvetica 15 bold", fg="blue")
         self.valueSumAll.grid(column=1, row=1, sticky="nw", padx=20, pady=(0, 10))
-        #"""
 
+        # When the first Order is accepted, the values are set
         if self.varDailyPrice.get() < 1:
             self.valueSumAll.config(text="---")
             self.valueSumDone.config(text="---")
@@ -406,86 +385,42 @@ class OrderApp:
             self.valueSumAll.config(text=str(self.varDailyPrice.get()))
             self.valueSumDone.config(text=str(self.varFinalSum.get()))
 
-        #~Form Labels 
+
+    #~Form Labels 
     def CreateForm(self):
          
-        # Ensure both columns are correctly configured for alignment
-        self.frameEndFormShiftEnd.grid_columnconfigure(0, weight=1)  # Labels column
-        self.frameEndFormShiftEnd.grid_columnconfigure(1, weight=1)  # Entries column
+        self.frameEndFormShiftEnd.grid_columnconfigure(0, weight=1)
+        self.frameEndFormShiftEnd.grid_columnconfigure(1, weight=1)
 
-        # --- Take Away Sum ---
-        self.lblSumTakeAway = Label(self.frameEndFormShiftEnd, text="Take Away Sum:", font=("Helvetica", 18))
+        # Take Away Sum
+        self.lblSumTakeAway = Label(self.frameEndFormShiftEnd, text="Objednávky bistro:", font=("Helvetica", 18))
         self.lblSumTakeAway.grid(column=0, row=0, sticky="w", padx=10, pady=(20, 10))
 
         self.entrySumTakeAway = Entry(self.frameEndFormShiftEnd, width=20, textvariable=self.varTakeAwaySum, font=("Helvetica", 18))
         self.entrySumTakeAway.grid(column=1, row=0, padx=25, ipady=5, pady=(20, 10), sticky="ew")
 
-        # --- Food Card Sum ---
-        self.lblSumFoodCards = Label(self.frameEndFormShiftEnd, text="Food Card Sum:", font=("Helvetica", 18))
+        # Food Card Sum
+        self.lblSumFoodCards = Label(self.frameEndFormShiftEnd, text="Hodnota stravenek:", font=("Helvetica", 18))
         self.lblSumFoodCards.grid(column=0, row=1, sticky="w", padx=10, pady=10)
 
         self.entrySumFoodCards = Entry(self.frameEndFormShiftEnd, width=20, font=("Helvetica", 18))
         self.entrySumFoodCards.grid(column=1, row=1, padx=25, pady=10, ipady=5, sticky="ew")
 
-        # --- Cards Sum ---
-        self.lblSumCards = Label(self.frameEndFormShiftEnd, text="Cards Sum:", font=("Helvetica", 18))
+        # Cards Sum
+        self.lblSumCards = Label(self.frameEndFormShiftEnd, text="Hodnota karet:", font=("Helvetica", 18))
         self.lblSumCards.grid(column=0, row=2, sticky="w", padx=10, pady=10)
 
         self.entrySumCards = Entry(self.frameEndFormShiftEnd, width=20, font=("Helvetica", 18))
         self.entrySumCards.grid(column=1, row=2, padx=25, pady=10, ipady=5, sticky="ew")
 
-        # --- Extra Spendings ---
-        self.lblSumShopping = Label(self.frameEndFormShiftEnd, text="Extra Spendings:", font=("Helvetica", 18))
+        # Extra Spendings
+        self.lblSumShopping = Label(self.frameEndFormShiftEnd, text="Výdaje navíc:", font=("Helvetica", 18))
         self.lblSumShopping.grid(column=0, row=3, sticky="w", padx=10, pady=10)
 
         self.entrySumShopping = Entry(self.frameEndFormShiftEnd, width=20, font=("Helvetica", 18))
         self.entrySumShopping.grid(column=1, row=3, padx=25, pady=10, ipady=5, sticky="ew")
 
-        # --- Money Deferment (1000Kč) ---
-        self.lblExtraMoney = Label(self.frameEndFormShiftEnd, text="Money Deferment (1000Kč):", font=("Helvetica", 18))
-        self.lblExtraMoney.grid(column=0, row=4, sticky="w", padx=10, pady=10)
-
-        self.entrySumExtraMoney = Entry(self.frameEndFormShiftEnd, width=20, textvariable=self.varDeferment, font=("Helvetica", 18), state="disabled")
-        self.entrySumExtraMoney.grid(column=1, row=4, padx=25, pady=10, ipady=5, sticky="ew")
-
-        # --- Cash Handed Over ---
-        self.lblSumOfTakeAway = Label(self.frameEndFormShiftEnd, text="Cash handed over:", font=("Helvetica", 18))
-        self.lblSumOfTakeAway.grid(column=0, row=5, sticky="w", padx=10, pady=10)
-
-        self.entrySumOfTakeAway = Entry(self.frameEndFormShiftEnd, width=20, textvariable=self.varCash, font=("Helvetica", 18))
-        self.entrySumOfTakeAway.grid(column=1, row=5, padx=25, pady=10, ipady=5, sticky="ew")
-
-        #~Two extra buttons
-        self.frameButtonsFormShiftEnd = Frame(self.frameEndFormShiftEnd)
-        self.frameButtonsFormShiftEnd.grid(column=0, columnspan=3, row=6,
-                                           sticky="nsew", pady=(14, 0))
-        
-        self.frameButtonsFormShiftEnd.grid_columnconfigure(0, weight=1)
-        self.frameButtonsFormShiftEnd.grid_columnconfigure(1, weight=1)
-        self.frameButtonsFormShiftEnd.grid_columnconfigure(2, weight=1)
-
-        # --- COUNT Button ---
-        self.btnCountEndShift = Button(self.frameButtonsFormShiftEnd, text="COUNT", width=10)
-        self.btnCountEndShift.grid(column=2, row=1, sticky="nsew", padx=(0, 24))
-        self.btnCountEndShift.configure(command=self.CountEndShift)
-
-        # --- SAVE Button---
-        self.btnSaveEndShift = Button(self.frameButtonsFormShiftEnd, text="SAVE", width=5)
-        self.btnSaveEndShift.grid(column=0, row=1, sticky="nsew", padx=(10, 0))
-        self.btnSaveEndShift.configure(command=self.SaveEndShift)
-
-    """
-    def CreateForm1(self):    
-        self.lblSumTakeAway = Label(self.frameEndFormShiftEnd, text="Take Away Sum:")
-        self.lblSumTakeAway.grid(column=0, row=0, sticky=W)
-        self.lblSumFoodCards = Label(self.frameEndFormShiftEnd, text="Food Card Sum:")
-        self.lblSumFoodCards.grid(column=0, row=1, sticky=W)
-        self.lblSumCards = Label(self.frameEndFormShiftEnd, text="Cards Sum: ")
-        self.lblSumCards.grid(column=0, row=2, sticky=W)
-        self.lblSumShopping = Label(self.frameEndFormShiftEnd, text="Extra Spendings: ")
-        self.lblSumShopping.grid(column=0, row=3, sticky=W)
-        
-        
+        """
         # This is the amount of money which are put aside
         # There are three usecases that can happened:
         # 1. 
@@ -511,47 +446,41 @@ class OrderApp:
         # In other words, the Cash Deferment is 0 and the Cash handled over is negative number.
         # this isn't correct approach and it is an error, so the error message must be triggered 
         # and who is responsible for the cashier has to look for some error in the sum of Cards or so...
+        """
+        # Money Deferment (1000Kč)
+        self.lblExtraMoney = Label(self.frameEndFormShiftEnd, text="Denní odklad (1000Kč):", font=("Helvetica", 18))
+        self.lblExtraMoney.grid(column=0, row=4, sticky="w", padx=10, pady=10)
 
-        self.lblExtraMoney = Label(self.frameEndFormShiftEnd, text="Money Deferment (1000Kč): ")
-        self.lblExtraMoney.grid(column=0, row=4, sticky=W)
-        self.lblSumOfTakeAway = Label(self.frameEndFormShiftEnd, text="Cash handed over: ")
-        self.lblSumOfTakeAway.grid(column=0, row=5, sticky=W)
+        self.entrySumExtraMoney = Entry(self.frameEndFormShiftEnd, width=20, textvariable=self.varDeferment, font=("Helvetica", 18), state="disabled")
+        self.entrySumExtraMoney.grid(column=1, row=4, padx=25, pady=10, ipady=5, sticky="ew")
 
-        #~Form Entrys
-        self.entrySumTakeAway = Entry(self.frameEndFormShiftEnd, width=21, textvariable=self.varTakeAwaySum)
-        self.entrySumTakeAway.grid(column=1, row=0, padx=(25,0))
-        self.entrySumTakeAway.configure()
+        # Cash Handed Over
+        self.lblSumOfTakeAway = Label(self.frameEndFormShiftEnd, text="Celkem v hotovosti:", font=("Helvetica", 18))
+        self.lblSumOfTakeAway.grid(column=0, row=5, sticky="w", padx=10, pady=10)
 
-        self.entrySumFoodCards = Entry(self.frameEndFormShiftEnd, width=21)
-        self.entrySumFoodCards.grid(column=1, row=1, padx=(25,0))
-        
-        self.entrySumCards = Entry(self.frameEndFormShiftEnd, width=21)
-        self.entrySumCards.grid(column=1, row=2, padx=(25,0))
-        
-        self.entrySumShopping = Entry(self.frameEndFormShiftEnd, width=21)
-        self.entrySumShopping.grid(column=1, row=3, padx=(25,0))
-        
-        self.entrySumExtraMoney = Entry(self.frameEndFormShiftEnd, width=21, textvariable=self.varDeferment)
-        self.entrySumExtraMoney.grid(column=1, row=4, padx=(25,0))
-        
-        self.entrySumOfTakeAway = Entry(self.frameEndFormShiftEnd, width=21, textvariable=self.varCash)
-        self.entrySumOfTakeAway.grid(column=1, row=5, padx=(25,0))
+        self.entrySumOfTakeAway = Entry(self.frameEndFormShiftEnd, width=20, textvariable=self.varCash, font=("Helvetica", 18))
+        self.entrySumOfTakeAway.grid(column=1, row=5, padx=25, pady=10, ipady=5, sticky="ew")
 
-        #~Two extra buttons
+        # Two control buttons Frame
         self.frameButtonsFormShiftEnd = Frame(self.frameEndFormShiftEnd)
         self.frameButtonsFormShiftEnd.grid(column=0, columnspan=3, row=6,
                                            sticky="nsew", pady=(14, 0))
         
-        self.btnCountEndShift = Button(self.frameButtonsFormShiftEnd, text="COUNT",
-                                       width=12)
-        self.btnCountEndShift.pack(side="right")
-        self.btnCountEndShift.configure(command=self.CountEndShift)
-        
-        self.btnSaveEndShift = Button(self.frameButtonsFormShiftEnd, text="SAVE")
-        self.btnSaveEndShift.pack(side="left")
-        self.btnSaveEndShift.configure(command=self.SaveEndShift)
-    """
+        self.frameButtonsFormShiftEnd.grid_columnconfigure(0, weight=1)
+        self.frameButtonsFormShiftEnd.grid_columnconfigure(1, weight=1)
+        self.frameButtonsFormShiftEnd.grid_columnconfigure(2, weight=1)
 
+        # COUNT Button
+        self.btnCountEndShift = Button(self.frameButtonsFormShiftEnd, text="COUNT", width=11)
+        self.btnCountEndShift.grid(column=2, row=1, sticky="nsew", padx=(0, 24), ipadx=4)
+        self.btnCountEndShift.configure(command=self.CountEndShift)
+
+        # SAVE Button
+        self.btnSaveEndShift = Button(self.frameButtonsFormShiftEnd, text="SAVE", width=5)
+        self.btnSaveEndShift.grid(column=0, row=1, sticky="nsew", padx=(10, 0))
+        self.btnSaveEndShift.configure(command=self.SaveEndShift)
+
+    # Editing the current form 
     def EditEndShiftForm(self):
         self.btnCountEndShift.config(text="COUNT", command=self.CountEndShift)
         self.entrySumCards.config(state="normal")
@@ -560,7 +489,9 @@ class OrderApp:
         self.entrySumTakeAway.config(state="normal")
         self.entrySumOfTakeAway.config(state="normal")
 
+    # Saving current form which will be saved and printed when the Print Shift end is triggered
     def SaveEndShift(self):
+        # !!!!!!! Make one more logic for not possible to save the corrupted form
         self.btnCountEndShift.config(text="EDIT", command=self.EditEndShiftForm)
         self.entrySumCards.config(state="disabled")
         self.entrySumExtraMoney.config(state="disabled")
@@ -569,8 +500,9 @@ class OrderApp:
         self.entrySumShopping.config(state="disabled")
         self.entrySumTakeAway.config(state="disabled")
     
+    # Counting if the form is valid with the acceptable values
     def MakeFinalSum(self):
-
+        # All fields
         form_entry_fields = {
             "take_away_sum": self.entrySumTakeAway,
             "cards": self.entrySumCards,
@@ -580,40 +512,48 @@ class OrderApp:
             "final_sum": self.entrySumOfTakeAway
         }
 
+        # Saving the values into the dict
         values = {}
         for key, entry in form_entry_fields.items():
             try:
                 values[key] = int(entry.get())
                 entry.config(background="white", foreground=dark_text_color)
+            # If not filled error
             except ValueError:
                 entry.config(background=dark_red, foreground=light_text_color)
                 return
 
+        # Expences that have to be decreased from the final sum
         expenses = values["cards"] + values["food_cards"] + values["shopping"]
 
+        #Error when the expenses are higher thatexpected
         if values["take_away_sum"] < expenses:
             error_field = False
             for key in ["cards", "food_cards", "shopping"]:
+                # If some Value is higher than the Final Sum it is wrong
                 if values[key] > values["take_away_sum"]:
                     form_entry_fields[key].config(background=dark_red, foreground=light_text_color)
                     error_field = True
 
             if error_field:
-                self.ShowErrorMessage(f"Field with red background\n"
-                    f"has unexpectedly high value\n"
-                    f"Please take a look at this field\n"
+                self.ShowErrorMessage(
+                    f"Pole s červeným pozadím\n"
+                    f"má neočekávaně vysokou hodnotu.\n"
+                    f"Prosím zkontrolujte toto pole.\n"
                     )
             else:
-                self.ShowErrorMessage(f"\n\n\nThe expenses are higher\n"
-                    f"than expected.\n"
-                    f"Please take a look at this field\n\n"
-                    f"In case that there were\n"
-                    f"big shopping expenses,\n"
-                    f"plese give the receipt to\n"
-                    f"any delivery guy and erase\n"
-                    f"the value here."
+                self.ShowErrorMessage(
+                    f"\n\n\nCelkové výdaje jsou vyšší,\n"
+                    f"než by se očekávalo.\n"
+                    f"Prosím zkontrolujte tyto pole.\n\n"
+                    f"Pokud se dělal velký nákup,\n"
+                    f"prosím předejte účtenku rozvozci.\n"
+                    f"ten vám za ni dá tolik peněz,\n"
+                    f"kolik jste zaplatili.\n"
+                    f"Poté smažte hodnotu v poli výdaje.\n"
                     )
 
+        # Counting the money deferment
         else:
             sum_with_deferment = values["take_away_sum"] - expenses
             if sum_with_deferment < 1000:
@@ -625,29 +565,37 @@ class OrderApp:
             
             self.ErrorMessageSuccess()
 
+    # Message when something goes wrong
     def ShowErrorMessage(self, message):
         self.errorCanvas.itemconfig(self.canvasText, text=message, fill=dark_text_color)
         self.errorCanvas.config(bg=light_red)
 
+    # Message when everything looks good
     def ErrorMessageSuccess(self):
-        success_message = (
-            f"\n\n\n\nEverything looks good\n\n"
-            f"Please pack:\n"
-        )
+        if self.varCash.get() == 0 and self.entrySumCards.get() == "0" and self.entrySumFoodCards.get() == "0":
+            success_message = (
+            f"\n\n\n\nDo obálky neodevzdáváte\n"
+            f"žádnou hotovost, stravenkové karty "
+            f"ani účtenky z karet\n")
 
-        if self.varCash.get() != 0:
-            success_message+=f"\t{self.varCash.get()}Kč in cash\n"
-        if self.entrySumCards.get() != "0":
-            success_message+=f"\t{self.entrySumCards.get()}Kč in card reciepts\n"
-        if self.entrySumFoodCards.get() != "0":
-            success_message+=f"\t{self.entrySumFoodCards.get()}Kč in food cards\n"
+        else:
+            success_message = (
+                f"\n\n\n\nVše vypadá dobře spočítáno.\n"
+                f"Do obálky prosím odevzdejte:\n"
+            )
 
-
-
+            if self.varCash.get() != 0:
+                success_message+=f"\t{self.varCash.get()}Kč v hototvosti\n"
+            if self.entrySumCards.get() != "0":
+                success_message+=f"\t{self.entrySumCards.get()}Kč v účtenkách karet\n"
+            if self.entrySumFoodCards.get() != "0":
+                success_message+=f"\t{self.entrySumFoodCards.get()}Kč ve stravenkách\n"
+            
         self.errorCanvas.itemconfig(self.canvasText,
             text=success_message, fill=dark_text_color)
         self.errorCanvas.config(bg=light_green)
 
+    # Counting the form logic
     def CountEndShift(self):
 
         entry_fields = {
@@ -680,7 +628,8 @@ class OrderApp:
         else:
             self.MakeFinalSum()
 
-        
+    
+    # Uploading the Inovice Future implementation now just dialog
     def UploadAction(self):
         filename = filedialog.askopenfilename()
         print('Selected:', filename)

@@ -1,237 +1,272 @@
 [
     {
-      "id": "001",
-      "datetime": "08.03.2025 09:10:02",
-      "status": "Ve frontě",
-      "total_price": "545 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Martina Tomankova",
-        "address": "Klášterní 415, Červenka",
-        "phone": "737807847"
-      },
-      "products": [
-        {"name": "25 Di Pietro (50 cm)", "price": "301 Kč + 15 Kč obal"},
-        {"name": "BEZLEPKOVÁ 8 Hawaii (32 cm)", "price": "219 Kč + 10 Kč obal"}
-      ]
+        "id": 1,
+        "datetime": "14.03.2025 01:01:15",
+        "status": "Ověřeno",
+        "total_price": "801 Kč",
+        "delivery": "Neznámý",
+        "customer": {
+            "name": "Lev Mareš",
+            "address": "Lipinka 79, Lipinka",
+            "phone": "7752760379"
+        },
+        "products": [
+            {
+                "name": "Pasta Carbonara",
+                "price": "99 Kč"
+            },
+            {
+                "name": "Pasta Tomato",
+                "price": "89 Kč"
+            },
+            {
+                "name": "Pizza Curiosa",
+                "price": "149 Kč"
+            },
+            {
+                "name": "Fries XXL",
+                "price": "75 Kč"
+            },
+            {
+                "name": "Pizza Bolzano",
+                "price": "129 Kč"
+            },
+            {
+                "name": "Wine",
+                "price": "150 Kč"
+            },
+            {
+                "name": "Pizza Martha",
+                "price": "110 Kč"
+            }
+        ]
     },
     {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-      ]
+        "id": 2,
+        "datetime": "14.03.2025 01:01:16",
+        "status": "Ověřeno",
+        "total_price": "342 Kč",
+        "delivery": "Neznámý",
+        "customer": {
+            "name": "Samuel Vaněk",
+            "address": "Tři Dvory 21, Tři Dvory",
+            "phone": "7741712584"
+        },
+        "products": [
+            {
+                "name": "Pizza Bolzano",
+                "price": "129 Kč"
+            },
+            {
+                "name": "Rozmarine soup",
+                "price": "45 Kč"
+            },
+            {
+                "name": "Nachos",
+                "price": "79 Kč"
+            },
+            {
+                "name": "Pasta Tomato",
+                "price": "89 Kč"
+            }
+        ]
     },
     {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "R1",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-        
-      ]
+        "id": 3,
+        "datetime": "14.03.2025 01:01:17",
+        "status": "Neověřeno",
+        "total_price": "338 Kč",
+        "delivery": "Neznámý",
+        "customer": {
+            "name": "Tadeáš Zima",
+            "address": "Medlov 351, Medlov",
+            "phone": "7709235474"
+        },
+        "products": [
+            {
+                "name": "Hamburger XXL",
+                "price": "210 Kč"
+            },
+            {
+                "name": "Coca-cola",
+                "price": "49 Kč"
+            },
+            {
+                "name": "Cola XXL",
+                "price": "79 Kč"
+            }
+        ]
     },
     {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-      ]
+        "id": 4,
+        "datetime": "14.03.2025 01:01:17",
+        "status": "Neověřeno",
+        "total_price": "228 Kč",
+        "delivery": "Neznámý",
+        "customer": {
+            "name": "Daniel Letáček",
+            "address": "Troubelice 234, Troubelice",
+            "phone": "7791212341"
+        },
+        "products": [
+            {
+                "name": "Pizza Bolzano",
+                "price": "129 Kč"
+            },
+            {
+                "name": "Pasta Carbonara",
+                "price": "99 Kč"
+            }
+        ]
     },
     {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-      ]
+        "id": 5,
+        "datetime": "14.03.2025 01:01:18",
+        "status": "Neověřeno",
+        "total_price": "149 Kč",
+        "delivery": "Neznámý",
+        "customer": {
+            "name": "Marek Krejčí",
+            "address": "Červenka 416, Červenka",
+            "phone": "7738266122"
+        },
+        "products": [
+            {
+                "name": "Pizza Hawaii",
+                "price": "149 Kč"
+            }
+        ]
     },
     {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-      ]
+        "id": 6,
+        "datetime": "14.03.2025 01:01:22",
+        "status": "Neověřeno",
+        "total_price": "384 Kč",
+        "delivery": "Neznámý",
+        "customer": {
+            "name": "Silvestr Nováček",
+            "address": "Lhota nad Moravou 272, Lhota nad Moravou",
+            "phone": "7787179092"
+        },
+        "products": [
+            {
+                "name": "Meatballs",
+                "price": "85 Kč"
+            },
+            {
+                "name": "Beer",
+                "price": "35 Kč"
+            },
+            {
+                "name": "Fries XXL",
+                "price": "75 Kč"
+            },
+            {
+                "name": "Chilli Pizza",
+                "price": "189 Kč"
+            }
+        ]
     },
     {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-      ]
+        "id": 7,
+        "datetime": "14.03.2025 01:01:29",
+        "status": "Ověřeno",
+        "total_price": "668 Kč",
+        "delivery": "Neznámý",
+        "customer": {
+            "name": "Lukáš Havlíček",
+            "address": "Pňovice 264, Pňovice",
+            "phone": "7717287749"
+        },
+        "products": [
+            {
+                "name": "Pizza Martha",
+                "price": "110 Kč"
+            },
+            {
+                "name": "Pizza Saluto",
+                "price": "150 Kč"
+            },
+            {
+                "name": "Pizza Curiosa",
+                "price": "149 Kč"
+            },
+            {
+                "name": "Meatballs",
+                "price": "85 Kč"
+            },
+            {
+                "name": "Fries",
+                "price": "55 Kč"
+            },
+            {
+                "name": "Pasta Cheese",
+                "price": "119 Kč"
+            }
+        ]
     },
     {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-      ]
+        "id": 8,
+        "datetime": "14.03.2025 01:01:30",
+        "status": "Neověřeno",
+        "total_price": "496 Kč",
+        "delivery": "Neznámý",
+        "customer": {
+            "name": "Josef Jelínek",
+            "address": "Nová Hradečná 128, Nová Hradečná",
+            "phone": "7743025111"
+        },
+        "products": [
+            {
+                "name": "Pizza Bolzano",
+                "price": "129 Kč"
+            },
+            {
+                "name": "Pasta Tomato",
+                "price": "89 Kč"
+            },
+            {
+                "name": "Pizza Curiosa",
+                "price": "149 Kč"
+            },
+            {
+                "name": "Hamburger",
+                "price": "129 Kč"
+            }
+        ]
     },
     {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-      ]
-    },
-    {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-      ]
-    },
-    {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-      ]
-    },
-    {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-      ]
-    },
-    {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-      ]
-    },
-    {
-      "id": "002",
-      "datetime": "08.03.2025 09:54:02",
-      "status": "Ve frontě",
-      "total_price": "482 Kč",
-      "delivery": "Neznámý",
-      "customer": {
-        "name": "Lubomír Satorova",
-        "address": "Pňovice 286, Pňovice",
-        "phone": "774518737"
-      },
-      "products": [
-        {"name": "43 Quattro Formaggi Maestro (40 cm)", "price": "239 Kč + 12 Kč obal"},
-        {"name": "6 Prosciuto (40 cm)", "price": "219 Kč + 12 Kč obal"}
-      ]
+        "id": 9,
+        "datetime": "14.03.2025 01:01:30",
+        "status": "Neověřeno",
+        "total_price": "448 Kč",
+        "delivery": "Neznámý",
+        "customer": {
+            "name": "Gandalf Kutnahora",
+            "address": "Klopina 249, Klopina",
+            "phone": "7782228062"
+        },
+        "products": [
+            {
+                "name": "Salted pop-corn",
+                "price": "100 Kč"
+            },
+            {
+                "name": "Rozmarine soup",
+                "price": "45 Kč"
+            },
+            {
+                "name": "Pasta Carbonara",
+                "price": "99 Kč"
+            },
+            {
+                "name": "Pizza Curiosa",
+                "price": "149 Kč"
+            },
+            {
+                "name": "Fries",
+                "price": "55 Kč"
+            }
+        ]
     }
 ]
-  

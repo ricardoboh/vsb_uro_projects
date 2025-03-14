@@ -1,271 +1,153 @@
 [
     {
         "id": 1,
-        "datetime": "14.03.2025 01:01:15",
-        "status": "Ověřeno",
-        "total_price": "801 Kč",
-        "delivery": "Neznámý",
+        "datetime": "14.03.2025 14:09:26",
+        "status": "Hotovo",
+        "total_price": "1298 Kč",
+        "delivery": "R2",
         "customer": {
-            "name": "Lev Mareš",
-            "address": "Lipinka 79, Lipinka",
-            "phone": "7752760379"
+            "name": "Čestmír Janda",
+            "address": "Tři Dvory 59, Tři Dvory",
+            "phone": "7789672556"
         },
         "products": [
             {
-                "name": "Pasta Carbonara",
-                "price": "99 Kč"
+                "name": "Pizza Milano",
+                "price": "179 Kč"
             },
             {
-                "name": "Pasta Tomato",
-                "price": "89 Kč"
+                "name": "Pizza Caprese",
+                "price": "179 Kč"
             },
             {
-                "name": "Pizza Curiosa",
-                "price": "149 Kč"
+                "name": "Pizza Prosciuto",
+                "price": "179 Kč"
             },
             {
-                "name": "Fries XXL",
-                "price": "75 Kč"
+                "name": "Pizza Gustosa",
+                "price": "179 Kč"
             },
             {
-                "name": "Pizza Bolzano",
-                "price": "129 Kč"
+                "name": "Pizza Cardinale",
+                "price": "179 Kč"
             },
             {
-                "name": "Wine",
-                "price": "150 Kč"
+                "name": "Pizza Piacentina",
+                "price": "214 Kč"
             },
             {
-                "name": "Pizza Martha",
-                "price": "110 Kč"
-            }
-        ]
-    },
-    {
-        "id": 2,
-        "datetime": "14.03.2025 01:01:16",
-        "status": "Ověřeno",
-        "total_price": "342 Kč",
-        "delivery": "Neznámý",
-        "customer": {
-            "name": "Samuel Vaněk",
-            "address": "Tři Dvory 21, Tři Dvory",
-            "phone": "7741712584"
-        },
-        "products": [
-            {
-                "name": "Pizza Bolzano",
-                "price": "129 Kč"
-            },
-            {
-                "name": "Rozmarine soup",
-                "price": "45 Kč"
-            },
-            {
-                "name": "Nachos",
-                "price": "79 Kč"
-            },
-            {
-                "name": "Pasta Tomato",
-                "price": "89 Kč"
-            }
-        ]
-    },
-    {
-        "id": 3,
-        "datetime": "14.03.2025 01:01:17",
-        "status": "Neověřeno",
-        "total_price": "338 Kč",
-        "delivery": "Neznámý",
-        "customer": {
-            "name": "Tadeáš Zima",
-            "address": "Medlov 351, Medlov",
-            "phone": "7709235474"
-        },
-        "products": [
-            {
-                "name": "Hamburger XXL",
-                "price": "210 Kč"
-            },
-            {
-                "name": "Coca-cola",
-                "price": "49 Kč"
-            },
-            {
-                "name": "Cola XXL",
-                "price": "79 Kč"
-            }
-        ]
-    },
-    {
-        "id": 4,
-        "datetime": "14.03.2025 01:01:17",
-        "status": "Neověřeno",
-        "total_price": "228 Kč",
-        "delivery": "Neznámý",
-        "customer": {
-            "name": "Daniel Letáček",
-            "address": "Troubelice 234, Troubelice",
-            "phone": "7791212341"
-        },
-        "products": [
-            {
-                "name": "Pizza Bolzano",
-                "price": "129 Kč"
-            },
-            {
-                "name": "Pasta Carbonara",
-                "price": "99 Kč"
-            }
-        ]
-    },
-    {
-        "id": 5,
-        "datetime": "14.03.2025 01:01:18",
-        "status": "Neověřeno",
-        "total_price": "149 Kč",
-        "delivery": "Neznámý",
-        "customer": {
-            "name": "Marek Krejčí",
-            "address": "Červenka 416, Červenka",
-            "phone": "7738266122"
-        },
-        "products": [
-            {
-                "name": "Pizza Hawaii",
-                "price": "149 Kč"
-            }
-        ]
-    },
-    {
-        "id": 6,
-        "datetime": "14.03.2025 01:01:22",
-        "status": "Neověřeno",
-        "total_price": "384 Kč",
-        "delivery": "Neznámý",
-        "customer": {
-            "name": "Silvestr Nováček",
-            "address": "Lhota nad Moravou 272, Lhota nad Moravou",
-            "phone": "7787179092"
-        },
-        "products": [
-            {
-                "name": "Meatballs",
-                "price": "85 Kč"
-            },
-            {
-                "name": "Beer",
-                "price": "35 Kč"
-            },
-            {
-                "name": "Fries XXL",
-                "price": "75 Kč"
-            },
-            {
-                "name": "Chilli Pizza",
+                "name": "Pizza Vegetariano",
                 "price": "189 Kč"
             }
         ]
     },
     {
-        "id": 7,
-        "datetime": "14.03.2025 01:01:29",
-        "status": "Ověřeno",
-        "total_price": "668 Kč",
-        "delivery": "Neznámý",
+        "id": 2,
+        "datetime": "14.03.2025 14:09:29",
+        "status": "Hotovo",
+        "total_price": "1308 Kč",
+        "delivery": "R1",
         "customer": {
-            "name": "Lukáš Havlíček",
-            "address": "Pňovice 264, Pňovice",
-            "phone": "7717287749"
+            "name": "Superman Bimho",
+            "address": "U Studánky 219, U Studánky",
+            "phone": "7752354668"
         },
         "products": [
             {
-                "name": "Pizza Martha",
-                "price": "110 Kč"
-            },
-            {
-                "name": "Pizza Saluto",
-                "price": "150 Kč"
-            },
-            {
                 "name": "Pizza Curiosa",
-                "price": "149 Kč"
+                "price": "179 Kč"
             },
             {
-                "name": "Meatballs",
-                "price": "85 Kč"
+                "name": "Pizza Primavera",
+                "price": "189 Kč"
             },
             {
-                "name": "Fries",
-                "price": "55 Kč"
+                "name": "Pizza Popay",
+                "price": "179 Kč"
             },
             {
-                "name": "Pasta Cheese",
-                "price": "119 Kč"
+                "name": "Pizza Zola",
+                "price": "179 Kč"
+            },
+            {
+                "name": "Pizza Quattro di Salami",
+                "price": "179 Kč"
+            },
+            {
+                "name": "Pizza Piacentina",
+                "price": "214 Kč"
+            },
+            {
+                "name": "Pizza Vegetariano",
+                "price": "189 Kč"
             }
         ]
     },
     {
-        "id": 8,
-        "datetime": "14.03.2025 01:01:30",
-        "status": "Neověřeno",
-        "total_price": "496 Kč",
-        "delivery": "Neznámý",
+        "id": 3,
+        "datetime": "14.03.2025 14:09:32",
+        "status": "Hotovo",
+        "total_price": "726 Kč",
+        "delivery": "R3",
         "customer": {
-            "name": "Josef Jelínek",
-            "address": "Nová Hradečná 128, Nová Hradečná",
-            "phone": "7743025111"
+            "name": "Patrick Bezduch",
+            "address": "Hradečná 209, Hradečná",
+            "phone": "7714551947"
         },
         "products": [
             {
-                "name": "Pizza Bolzano",
-                "price": "129 Kč"
+                "name": "Pizza Primavera",
+                "price": "189 Kč"
             },
             {
-                "name": "Pasta Tomato",
-                "price": "89 Kč"
+                "name": "Pizza Gustosa",
+                "price": "179 Kč"
             },
             {
-                "name": "Pizza Curiosa",
-                "price": "149 Kč"
+                "name": "Pizza Agadir",
+                "price": "179 Kč"
             },
             {
-                "name": "Hamburger",
-                "price": "129 Kč"
+                "name": "Pizza Salami",
+                "price": "179 Kč"
             }
         ]
     },
     {
-        "id": 9,
-        "datetime": "14.03.2025 01:01:30",
-        "status": "Neověřeno",
-        "total_price": "448 Kč",
-        "delivery": "Neznámý",
+        "id": 4,
+        "datetime": "14.03.2025 14:10:09",
+        "status": "Canceled",
+        "total_price": "1099 Kč",
+        "delivery": "Nedoručeno",
         "customer": {
-            "name": "Gandalf Kutnahora",
-            "address": "Klopina 249, Klopina",
-            "phone": "7782228062"
+            "name": "Šimon Malý",
+            "address": "Plinkout 29, Plinkout",
+            "phone": "7767957368"
         },
         "products": [
             {
-                "name": "Salted pop-corn",
-                "price": "100 Kč"
+                "name": "Pizza San Daniele",
+                "price": "194 Kč"
             },
             {
-                "name": "Rozmarine soup",
-                "price": "45 Kč"
+                "name": "Pizza Cardinale",
+                "price": "179 Kč"
             },
             {
-                "name": "Pasta Carbonara",
-                "price": "99 Kč"
+                "name": "Pizza Vegetariano",
+                "price": "189 Kč"
             },
             {
-                "name": "Pizza Curiosa",
-                "price": "149 Kč"
+                "name": "Pizza Rimini",
+                "price": "179 Kč"
             },
             {
-                "name": "Fries",
-                "price": "55 Kč"
+                "name": "Pizza Popay",
+                "price": "179 Kč"
+            },
+            {
+                "name": "Pizza Familiare",
+                "price": "179 Kč"
             }
         ]
     }

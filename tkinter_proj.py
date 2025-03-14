@@ -88,31 +88,30 @@ surnames = [
 ]
 
 product_list = [
-    ("Hamburger", "129 Kč"),
-    ("Pizza Martha", "110 Kč"),
-    ("Pizza Bolzano", "129 Kč"),
-    ("Pizza Saluto", "150 Kč"),
-    ("Pizza Hawaii", "149 Kč"),
-    ("Pizza Curiosa", "149 Kč"),
-    ("Pizza Havana", "129 Kč"),
-    ("Hamburger XXL", "210 Kč"),
-    ("Pasta Carbonara", "99 Kč"),
-    ("Pasta Tomato", "89 Kč"),
-    ("Pasta Cheese", "119 Kč"),
-    ("Fries", "55 Kč"),
-    ("Fries XXL", "75 Kč"),
-    ("Baguette", "29 Kč"),
-    ("Rozmarine soup", "45 Kč"),
-    ("Wine", "150 Kč"),
-    ("Coca-cola", "49 Kč"),
-    ("Cola XXL", "79 Kč"),
-    ("Kofola", "45 Kč"),
-    ("Tofu sticks", "70 Kč"),
-    ("Chilli Pizza", "189 Kč"),
-    ("Nachos", "79 Kč"),
-    ("Salted pop-corn", "100 Kč"),
-    ("Meatballs", "85 Kč"),
-    ("Beer", "35 Kč")
+    ("Pizza Mozzarella", "179 Kč"),
+    ("Pizza Quattro Formaggi", "179 Kč"),
+    ("Pizza Vegetariano", "189 Kč"),
+    ("Pizza Primavera", "189 Kč"),
+    ("Pizza Caprese", "179 Kč"),
+    ("Pizza Prosciuto", "179 Kč"),
+    ("Pizza Salami", "179 Kč"),
+    ("Pizza Hawaii", "179 Kč"),
+    ("Pizza Quattro di Salami", "179 Kč"),
+    ("Pizza Capricciosa", "179 Kč"),
+    ("Pizza Rimini", "179 Kč"),
+    ("Pizza San Daniele", "194 Kč"),
+    ("Pizza Monako", "208 Kč"),
+    ("Pizza Cardinale", "179 Kč"),
+    ("Pizza Madona", "189 Kč"),
+    ("Pizza Popay", "179 Kč"),
+    ("Pizza Milano", "179 Kč"),
+    ("Pizza Curiosa", "179 Kč"),
+    ("Pizza Agadir", "179 Kč"),
+    ("Pizza Gustosa", "179 Kč"),
+    ("Pizza Zola", "179 Kč"),
+    ("Pizza Generosa", "179 Kč"),
+    ("Pizza Familiare", "179 Kč"),
+    ("Pizza Piacentina", "214 Kč")
 ]
 
 villages = [
@@ -137,16 +136,19 @@ class OrderApp:
         root.resizable(False, False)
         self.screen_width = root.winfo_screenwidth()
         self.screen_height = root.winfo_screenheight()
-        root.geometry(f"{self.screen_width-70}x{self.screen_height}+70+0")
+        root.geometry(f"{self.screen_width-70}x{self.screen_height-70}+70+0")
 
         #Variables
-        self.varTakeAwaySum = IntVar(value = 1000)
+        self.varTakeAwaySum = IntVar(value = 0)
         self.varDeferment = IntVar(value = 0)
         self.varDictDeliveries = {1: IntVar(value = 0), 2: IntVar(value = 0),
                                   3: IntVar(value = 0), 4: IntVar(value = 0),
                                   5: IntVar(value = 0), 6: IntVar(value = 0)
                                   }
         self.varCash = IntVar(value = 0)
+        self.varFinalSum = IntVar(value = 0)
+        self.varDailyPrice = IntVar(value = 0)
+        self.varOrderNum = IntVar(value = 0)
 
 
         #Fonts
@@ -241,6 +243,9 @@ class OrderApp:
 
         with open("orders.json", "w", encoding="utf-8") as file:
             json.dump(orders, file, indent=4, ensure_ascii=False)
+        
+        self.varDailyPrice.set(self.varDailyPrice.get() + total_price)
+        self.varOrderNum.set(self.varOrderNum.get() + 1)
 
         self.UpdateFramesList()
 
@@ -387,12 +392,19 @@ class OrderApp:
         self.lblSumAll.grid(column=0, row=1, sticky="nw", padx=0, pady=(0, 10))
 
         # Dynamic Values (Right Column)
-        self.valueSumDone = Label(self.frameSumaryOfDeliveries, text="---", font="Helvetica 18 bold", fg="blue")
+        self.valueSumDone = Label(self.frameSumaryOfDeliveries, text="", font="Helvetica 18 bold", fg="blue")
         self.valueSumDone.grid(column=1, row=0, sticky="nw", padx=20, pady=(0, 10))
 
-        self.valueSumAll = Label(self.frameSumaryOfDeliveries, text="---", font="Helvetica 15 bold", fg="blue")
+        self.valueSumAll = Label(self.frameSumaryOfDeliveries, text="", font="Helvetica 15 bold", fg="blue")
         self.valueSumAll.grid(column=1, row=1, sticky="nw", padx=20, pady=(0, 10))
         #"""
+
+        if self.varDailyPrice.get() < 1:
+            self.valueSumAll.config(text="---")
+            self.valueSumDone.config(text="---")
+        else:
+            self.valueSumAll.config(text=str(self.varDailyPrice.get()))
+            self.valueSumDone.config(text=str(self.varFinalSum.get()))
 
         #~Form Labels 
     def CreateForm(self):
@@ -722,7 +734,7 @@ class OrderApp:
         self.scrollable_frame.bind(
             "<Configure>",
             lambda e: self.canvas.configure(
-                scrollregion=(0, 0, self.canvas.bbox("all")[2], self.canvas.bbox("all")[3] + 150)
+                scrollregion=(0, 0, self.canvas.bbox("all")[2], self.canvas.bbox("all")[3])
             )
         )
 
@@ -840,7 +852,7 @@ class OrderApp:
         self.active_scrollable_frame.bind(
             "<Configure>",
             lambda e: self.activeCanvas.configure(
-                scrollregion=(0, 0, self.activeCanvas.bbox("all")[2], self.activeCanvas.bbox("all")[3] + 50)
+                scrollregion=(0, 0, self.activeCanvas.bbox("all")[2], self.activeCanvas.bbox("all")[3])
             )
         )
         self.activeCanvas.bind_all("<MouseWheel>", self._on_mousewheel_active)
@@ -895,7 +907,11 @@ class OrderApp:
             Label(self.frameDeliveries ,text=f"Take away - {self.varTakeAwaySum.get()}Kč").grid(column=0, row=8, sticky="w")
             #Label(self.frameDeliveries ,text=f"Take away").grid(column=0, row=8, sticky="w")
             #Label(self.frameDeliveries ,text=f"{self.varTakeAwaySum.get()}Kč").grid(column=1, row=8, sticky="w")
-            
+
+        self.valueSumAll.config(text=str(self.varDailyPrice.get()) + " Kč")
+        self.valueSumDone.config(text=str(self.varFinalSum.get()) + " Kč")
+
+      
         
     def CreateActiveHeaderRow(self):
         
@@ -927,6 +943,8 @@ class OrderApp:
                 self.varTakeAwaySum.set(self.varTakeAwaySum.get() + int(order["total_price"].replace("Kč", "").strip())) 
             else:
                 self.varDictDeliveries[int(delivery_name[1])].set(self.varDictDeliveries[int(delivery_name[1])].get() + int(order["total_price"].replace("Kč", "").strip())) 
+
+            self.varFinalSum.set(self.varFinalSum.get() + int(order["total_price"].replace("Kč", "").strip()))
 
             with open("orders.json", "w", encoding="utf-8") as file:
                 json.dump(orders, file, indent=4, ensure_ascii=False)

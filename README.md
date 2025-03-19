@@ -61,9 +61,17 @@ The Order Management System is a Tkinter-based GUI application designed to manag
 - **JSON**: Data storage and retrieval.
 
 ## Usage Instructions
-1. Launch the application.
+1. Launch the application and press button Make Order a few times.
 2. Navigate between **Active Orders** and **Order History** tabs.
 3. Right-click an order to print or change the delivery assignment.
 4. Click **Finish Order** to complete an order and assign delivery.
-5. Click **Count** to validate shift-end financials.
-6. Click **Save** to finalize shift-end records.
+5. On end shift tab Click **Count** to validate shift-end financials.
+6. Afterwards Click **Save** to finalize shift-end records and save them.
+
+# Pictures
+![Active Orders tab](a1.png)
+![Select delivery window](a2.png)
+![Change delivery menu](a3.png)
+![Shift end tab](a4.png)
+![Shift end tab error](a5.png)
+![Shift end tab success](a6.png)

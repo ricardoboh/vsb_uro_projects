@@ -310,7 +310,62 @@ class OrderApp:
         self.varOrderNum.set(self.varOrderNum.get() + 1)
 
         self.UpdateFramesList()
+#Generates random order with random valuesQMessageBox
+    def generateRandomOrder(self):
+        name = random.choice(names) + random.choice(surnames)
+        village = random.choice(villages)
+        address = f"{village} {random.randint(1, 500)}, {village}"
+        phone = f"{random.randint(700, 800)} {random.randint(000, 1000)} {random.randint(000, 999)}"
 
+        num_products = random.randint(1, 8)
+        selected_products = random.sample(product_list, num_products)
+
+        products = [{"name": p[0], "price": f"{p[1]}"} for p in selected_products]
+
+        total_price = sum(int(p[1].split()[0]) for p in selected_products)
+        total_price_str = f"{total_price} Kč"
+
+        status = random.choice(["Neověřeno", "Ověřeno"])
+        delivery = "Neznámý"
+
+        global order_id_unique
+        order_id_unique += 1
+
+        new_order = {
+            "id": order_id_unique,
+            "datetime": datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
+            "status": status,
+            "total_price": total_price_str,
+            "delivery": delivery,
+            "customer": {
+                "name": name,
+                "address": address,
+                "phone": phone
+            },
+            "products": products
+        }
+
+        try:
+            with open("orders.json", "r", encoding="utf-8") as file:
+                orders = json.load(file)
+                if not isinstance(orders, list):
+                    orders = []
+        except (FileNotFoundError, json.JSONDecodeError):
+            orders = []
+
+        orders.append(new_order)
+
+        with open("orders.json", "w", encoding="utf-8") as file:
+            json.dump(orders, file, indent=4, ensure_ascii=False)
+        
+        self.varDailyPrice.set(self.varDailyPrice.get() + total_price)
+        if(self.varOrderNum.get() < 1):
+            self.varDateFirstOrder.set(new_order["datetime"])
+            self.valueDateFrom.config(text=str(self.varDateFirstOrder.get()))
+        self.varDateLastOrder.set(new_order["datetime"])
+        self.varOrderNum.set(self.varOrderNum.get() + 1)
+
+        self.UpdateFramesList()
 
 
     def CreateNotebook(self):
@@ -1172,7 +1227,7 @@ class OrderApp:
         self.UpdateFramesList()
 
     def PrintOrder(self):
-        msgInfo = msg.showinfo("Tisk Objednavky...", "Tisk probiha odsouhlaste tlacitkem")
+        msgInfo = msg.showinfo("Tisk Objednávky...", "Tisk probíhá odsouhlaste tlačítkem")
         pass
 
 root = Tk()

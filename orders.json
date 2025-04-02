@@ -1,14 +1,58 @@
 [
     {
         "id": 1,
-        "datetime": "19.03.2025 01:09:09",
+        "datetime": "25.03.2025 08:04:23",
         "status": "Hotovo",
-        "total_price": "1303 Kč",
-        "delivery": "R2",
+        "total_price": "373 Kč",
+        "delivery": "R1",
         "customer": {
-            "name": "Dušan Bartoš",
-            "address": "Horní Sukolom 88, Horní Sukolom",
-            "phone": "753 234 562"
+            "name": "Honza Kutnahora",
+            "address": "Tři Dvory 330, Tři Dvory",
+            "phone": "763 240 915"
+        },
+        "products": [
+            {
+                "name": "Pizza San Daniele",
+                "price": "194 Kč"
+            },
+            {
+                "name": "Pizza Salami",
+                "price": "179 Kč"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "datetime": "25.03.2025 08:04:24",
+        "status": "Hotovo",
+        "total_price": "358 Kč",
+        "delivery": "R3",
+        "customer": {
+            "name": "Abdullahi Stehlíček",
+            "address": "Klopina 486, Klopina",
+            "phone": "718 745 989"
+        },
+        "products": [
+            {
+                "name": "Pizza Quattro di Salami",
+                "price": "179 Kč"
+            },
+            {
+                "name": "Pizza Prosciuto",
+                "price": "179 Kč"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "datetime": "25.03.2025 08:04:25",
+        "status": "Hotovo",
+        "total_price": "1268 Kč",
+        "delivery": "Bistro",
+        "customer": {
+            "name": "Tomášek Jelínek",
+            "address": "Nová Hradečná 112, Nová Hradečná",
+            "phone": "707 456 211"
         },
         "products": [
             {
@@ -16,15 +60,11 @@
                 "price": "179 Kč"
             },
             {
-                "name": "Pizza Quattro di Salami",
+                "name": "Pizza Hawaii",
                 "price": "179 Kč"
             },
             {
-                "name": "Pizza Familiare",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Milano",
+                "name": "Pizza Rimini",
                 "price": "179 Kč"
             },
             {
@@ -32,33 +72,7 @@
                 "price": "194 Kč"
             },
             {
-                "name": "Pizza Gustosa",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Piacentina",
-                "price": "214 Kč"
-            }
-        ]
-    },
-    {
-        "id": 2,
-        "datetime": "19.03.2025 01:09:10",
-        "status": "Hotovo",
-        "total_price": "1447 Kč",
-        "delivery": "R1",
-        "customer": {
-            "name": "Radovan Hruška",
-            "address": "Benkov 124, Benkov",
-            "phone": "775 871 652"
-        },
-        "products": [
-            {
-                "name": "Pizza Hawaii",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Gustosa",
+                "name": "Pizza Popay",
                 "price": "179 Kč"
             },
             {
@@ -66,7 +80,47 @@
                 "price": "179 Kč"
             },
             {
-                "name": "Pizza Generosa",
+                "name": "Pizza Gustosa",
+                "price": "179 Kč"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "datetime": "25.03.2025 08:04:26",
+        "status": "Hotovo",
+        "total_price": "358 Kč",
+        "delivery": "Bistro",
+        "customer": {
+            "name": "Vojtěch Bílý",
+            "address": "Úsov 59, Úsov",
+            "phone": "708 745 479"
+        },
+        "products": [
+            {
+                "name": "Pizza Quattro di Salami",
+                "price": "179 Kč"
+            },
+            {
+                "name": "Pizza Zola",
+                "price": "179 Kč"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "datetime": "25.03.2025 08:04:27",
+        "status": "Hotovo",
+        "total_price": "1432 Kč",
+        "delivery": "Bistro",
+        "customer": {
+            "name": "Bořek Richter",
+            "address": "Benkov 287, Benkov",
+            "phone": "768 805 528"
+        },
+        "products": [
+            {
+                "name": "Pizza Caprese",
                 "price": "179 Kč"
             },
             {
@@ -74,87 +128,25 @@
                 "price": "179 Kč"
             },
             {
-                "name": "Pizza San Daniele",
-                "price": "194 Kč"
+                "name": "Pizza Cardinale",
+                "price": "179 Kč"
             },
             {
-                "name": "Pizza Agadir",
+                "name": "Pizza Mozzarella",
+                "price": "179 Kč"
+            },
+            {
+                "name": "Pizza Popay",
                 "price": "179 Kč"
             },
             {
                 "name": "Pizza Quattro di Salami",
                 "price": "179 Kč"
-            }
-        ]
-    },
-    {
-        "id": 3,
-        "datetime": "19.03.2025 01:09:10",
-        "status": "Hotovo",
-        "total_price": "920 Kč",
-        "delivery": "Bistro",
-        "customer": {
-            "name": "Soběslav Tichý",
-            "address": "Lazce 210, Lazce",
-            "phone": "732 281 703"
-        },
-        "products": [
-            {
-                "name": "Pizza Zola",
-                "price": "179 Kč"
             },
             {
-                "name": "Pizza Generosa",
+                "name": "Pizza Quattro Formaggi",
                 "price": "179 Kč"
             },
-            {
-                "name": "Pizza Vegetariano",
-                "price": "189 Kč"
-            },
-            {
-                "name": "Pizza San Daniele",
-                "price": "194 Kč"
-            },
-            {
-                "name": "Pizza Capricciosa",
-                "price": "179 Kč"
-            }
-        ]
-    },
-    {
-        "id": 4,
-        "datetime": "19.03.2025 01:09:10",
-        "status": "Hotovo",
-        "total_price": "358 Kč",
-        "delivery": "R2",
-        "customer": {
-            "name": "Tomáš Dušek",
-            "address": "Pískov 481, Pískov",
-            "phone": "740 798 429"
-        },
-        "products": [
-            {
-                "name": "Pizza Gustosa",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Cardinale",
-                "price": "179 Kč"
-            }
-        ]
-    },
-    {
-        "id": 5,
-        "datetime": "19.03.2025 01:09:10",
-        "status": "Hotovo",
-        "total_price": "179 Kč",
-        "delivery": "R2",
-        "customer": {
-            "name": "Batman Šebek",
-            "address": "Medlov 12, Medlov",
-            "phone": "790 748 344"
-        },
-        "products": [
             {
                 "name": "Pizza Zola",
                 "price": "179 Kč"
@@ -163,48 +155,30 @@
     },
     {
         "id": 6,
-        "datetime": "19.03.2025 01:09:11",
-        "status": "Hotovo",
-        "total_price": "537 Kč",
-        "delivery": "Bistro",
+        "datetime": "25.03.2025 08:04:29",
+        "status": "Zrušeno",
+        "total_price": "905 Kč",
+        "delivery": "Nedoručeno",
         "customer": {
-            "name": "Václav Vlček",
-            "address": "Králová 266, Králová",
-            "phone": "738 943 697"
+            "name": "Olej Slepýš",
+            "address": "Klopina 274, Klopina",
+            "phone": "797 902 167"
         },
         "products": [
             {
-                "name": "Pizza Mozzarella",
+                "name": "Pizza Agadir",
                 "price": "179 Kč"
             },
-            {
-                "name": "Pizza Curiosa",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Cardinale",
-                "price": "179 Kč"
-            }
-        ]
-    },
-    {
-        "id": 7,
-        "datetime": "19.03.2025 01:09:26",
-        "status": "Hotovo",
-        "total_price": "547 Kč",
-        "delivery": "R1",
-        "customer": {
-            "name": "Lev Sobotka",
-            "address": "Mladeč 62, Mladeč",
-            "phone": "730 411 553"
-        },
-        "products": [
             {
                 "name": "Pizza Hawaii",
                 "price": "179 Kč"
             },
             {
-                "name": "Pizza Curiosa",
+                "name": "Pizza Quattro Formaggi",
+                "price": "179 Kč"
+            },
+            {
+                "name": "Pizza Milano",
                 "price": "179 Kč"
             },
             {
@@ -214,117 +188,23 @@
         ]
     },
     {
-        "id": 8,
-        "datetime": "19.03.2025 01:09:41",
-        "status": "Hotovo",
-        "total_price": "208 Kč",
-        "delivery": "R3",
-        "customer": {
-            "name": "Roman Mareš",
-            "address": "Dědinka 150, Dědinka",
-            "phone": "780 83 824"
-        },
-        "products": [
-            {
-                "name": "Pizza Monako",
-                "price": "208 Kč"
-            }
-        ]
-    },
-    {
-        "id": 9,
-        "datetime": "19.03.2025 01:09:41",
-        "status": "Neověřeno",
-        "total_price": "358 Kč",
-        "delivery": "Neznámý",
-        "customer": {
-            "name": "Radek Bezduch",
-            "address": "Dolní Sukolom 361, Dolní Sukolom",
-            "phone": "704 183 178"
-        },
-        "products": [
-            {
-                "name": "Pizza Familiare",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Quattro di Salami",
-                "price": "179 Kč"
-            }
-        ]
-    },
-    {
-        "id": 10,
-        "datetime": "19.03.2025 01:09:42",
-        "status": "Hotovo",
-        "total_price": "745 Kč",
-        "delivery": "R1",
-        "customer": {
-            "name": "Abdullahi Macháček",
-            "address": "Dědinka 127, Dědinka",
-            "phone": "744 341 414"
-        },
-        "products": [
-            {
-                "name": "Pizza Prosciuto",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Monako",
-                "price": "208 Kč"
-            },
-            {
-                "name": "Pizza Caprese",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Agadir",
-                "price": "179 Kč"
-            }
-        ]
-    },
-    {
-        "id": 11,
-        "datetime": "19.03.2025 01:09:43",
+        "id": 7,
+        "datetime": "25.03.2025 08:04:30",
         "status": "Ověřeno",
-        "total_price": "1442 Kč",
+        "total_price": "373 Kč",
         "delivery": "Neznámý",
         "customer": {
-            "name": "Samuel Pěvec",
-            "address": "Lazce 192, Lazce",
-            "phone": "734 276 653"
+            "name": "Oto Bárta",
+            "address": "Hlivice 120, Hlivice",
+            "phone": "736 251 446"
         },
         "products": [
             {
-                "name": "Pizza Generosa",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Vegetariano",
-                "price": "189 Kč"
+                "name": "Pizza San Daniele",
+                "price": "194 Kč"
             },
             {
                 "name": "Pizza Agadir",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Zola",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Quattro di Salami",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Gustosa",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Popay",
-                "price": "179 Kč"
-            },
-            {
-                "name": "Pizza Prosciuto",
                 "price": "179 Kč"
             }
         ]
